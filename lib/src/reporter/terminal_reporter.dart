@@ -1,5 +1,6 @@
 import '../models/check_result.dart';
 import '../models/ci_report.dart';
+import '../version.dart';
 
 // ANSI color codes
 const _reset = '\x1B[0m';
@@ -20,7 +21,7 @@ class TerminalReporter {
     print('$_cyan┌$border┐$_reset');
     print(
       '$_cyan│$_reset'
-      '$_bold       flutter_local_ci  v0.1.0          $_reset'
+      '$_bold       flutter_local_ci  v$packageVersion          $_reset'
       '$_cyan│$_reset',
     );
     print('$_cyan└$border┘$_reset');

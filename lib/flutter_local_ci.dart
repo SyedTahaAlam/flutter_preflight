@@ -14,4 +14,4 @@ export 'src/runner.dart';
 export 'src/reporter/terminal_reporter.dart';
 export 'src/reporter/html_reporter.dart';
 export 'src/reporter/json_reporter.dart';
-export 'src/hooks/git_hook_installer.dart';
+export 'src/version.dart';
