@@ -10,8 +10,7 @@ void main() {
     late Directory tempDir;
 
     setUp(() {
-      tempDir =
-          Directory.systemTemp.createTempSync('flutter_local_ci_config_');
+      tempDir = Directory.systemTemp.createTempSync('flutter_local_ci_config_');
     });
 
     tearDown(() {
@@ -28,15 +27,13 @@ void main() {
     });
 
     test('load() returns defaults when file does not exist', () {
-      final config =
-          ConfigLoader.load(p.join(tempDir.path, 'missing.yaml'));
+      final config = ConfigLoader.load(p.join(tempDir.path, 'missing.yaml'));
       expect(config.checks.analyze.enabled, isTrue);
     });
 
     test('load() returns defaults when file is empty', () {
       File(p.join(tempDir.path, 'flutter_ci.yaml')).writeAsStringSync('');
-      final config =
-          ConfigLoader.load(p.join(tempDir.path, 'flutter_ci.yaml'));
+      final config = ConfigLoader.load(p.join(tempDir.path, 'flutter_ci.yaml'));
       expect(config.checks.analyze.enabled, isTrue);
     });
 

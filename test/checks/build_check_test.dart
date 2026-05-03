@@ -31,8 +31,7 @@ void main() {
 
     test('returns skipped when no platforms configured', () async {
       final config = CiConfig(
-        checks:
-            ChecksConfig(build: BuildConfig(enabled: true, platforms: [])),
+        checks: ChecksConfig(build: BuildConfig(enabled: true, platforms: [])),
       );
 
       final result = await check.run(

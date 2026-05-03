@@ -56,12 +56,14 @@ class CiRunner {
 
     if (only != null && only!.isNotEmpty) {
       final keys = only!.map(_normalize).toSet();
-      filtered = filtered.where((c) => keys.contains(_normalize(c.name))).toList();
+      filtered =
+          filtered.where((c) => keys.contains(_normalize(c.name))).toList();
     }
 
     if (skip != null && skip!.isNotEmpty) {
       final keys = skip!.map(_normalize).toSet();
-      filtered = filtered.where((c) => !keys.contains(_normalize(c.name))).toList();
+      filtered =
+          filtered.where((c) => !keys.contains(_normalize(c.name))).toList();
     }
 
     return filtered;

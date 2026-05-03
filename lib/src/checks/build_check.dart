@@ -54,7 +54,8 @@ class BuildCheck extends BaseCheck {
       return '[$label] ${r.platform}\n${r.output}';
     }).join('\n\n');
 
-    final anyFailed = platformResults.any((r) => r.status == CheckStatus.failed);
+    final anyFailed =
+        platformResults.any((r) => r.status == CheckStatus.failed);
     final allSkipped =
         platformResults.every((r) => r.status == CheckStatus.skipped);
 

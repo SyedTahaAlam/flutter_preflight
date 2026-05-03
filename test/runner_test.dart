@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_local_ci/src/hooks/git_hook_installer.dart';
 import 'package:test/test.dart';
 
 import 'package:flutter_local_ci/flutter_local_ci.dart';
@@ -108,8 +109,7 @@ void main() {
     late Directory tempDir;
 
     setUp(() {
-      tempDir = Directory.systemTemp
-          .createTempSync('flutter_local_ci_hook_');
+      tempDir = Directory.systemTemp.createTempSync('flutter_local_ci_hook_');
       // Create a fake .git/hooks directory
       Directory('${tempDir.path}/.git/hooks').createSync(recursive: true);
     });

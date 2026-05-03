@@ -93,8 +93,7 @@ class HtmlReporter {
         : '';
     final outputHtml =
         result.output.isNotEmpty ? '<pre>${_esc(result.output)}</pre>' : '';
-    final openClass =
-        result.status == CheckStatus.failed ? ' open' : '';
+    final openClass = result.status == CheckStatus.failed ? ' open' : '';
 
     return '''
   <div class="card">

@@ -4,7 +4,7 @@ version: 1
 checks:
   analyze:
     enabled: true
-    fatal_infos: false
+    fatal_infos: true
     fatal_warnings: true
 
   format:
@@ -21,7 +21,7 @@ checks:
       - "**/*.freezed.dart"
 
   build:
-    enabled: false
+    enabled: true
     platforms:
       - apk
       # - ios      (macOS only)
@@ -35,10 +35,10 @@ output:
     enabled: true
     verbose: false              # true = show full subprocess output
   html_report:
-    enabled: false
+    enabled: true
     output_path: "ci_reports/report.html"
   json_report:
-    enabled: false
+    enabled: true
     output_path: "ci_reports/report.json"
 
 hooks:

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:flutter_local_ci/src/hooks/git_hook_installer.dart';
 import 'package:path/path.dart' as p;
 
 import 'package:flutter_local_ci/flutter_local_ci.dart';
@@ -65,14 +66,12 @@ class RunCommand extends Command<int> {
           help: 'Comma-separated checks to run (analyze,format,test,build).',
           defaultsTo: '')
       ..addOption('skip',
-          help: 'Comma-separated checks to skip.',
-          defaultsTo: '');
+          help: 'Comma-separated checks to skip.', defaultsTo: '');
   }
 
   @override
   Future<int> run() async {
-    final projectPath =
-        p.canonicalize(argResults!['project-path'] as String);
+    final projectPath = p.canonicalize(argResults!['project-path'] as String);
     final configArg = argResults!['config'] as String;
     final configPath =
         p.isAbsolute(configArg) ? configArg : p.join(projectPath, configArg);
@@ -123,8 +122,7 @@ class RunCommand extends Command<int> {
 
     for (final check in allChecks) {
       reporter.printRunning(check.name);
-      final result =
-          await check.run(projectPath: projectPath, config: config);
+      final result = await check.run(projectPath: projectPath, config: config);
       results.add(result);
       reporter.printResult(result);
     }
@@ -141,15 +139,13 @@ class RunCommand extends Command<int> {
     reporter.printFooter(report);
 
     if (reportHtml || config.output.htmlReport.enabled) {
-      final htmlPath =
-          p.join(projectPath, config.output.htmlReport.outputPath);
+      final htmlPath = p.join(projectPath, config.output.htmlReport.outputPath);
       HtmlReporter().write(report, htmlPath);
       print('HTML report written to $htmlPath');
     }
 
     if (reportJson || config.output.jsonReport.enabled) {
-      final jsonPath =
-          p.join(projectPath, config.output.jsonReport.outputPath);
+      final jsonPath = p.join(projectPath, config.output.jsonReport.outputPath);
       JsonReporter().write(report, jsonPath);
       print('JSON report written to $jsonPath');
     }
@@ -160,7 +156,8 @@ class RunCommand extends Command<int> {
     if (!noHook) {
       final onFailure = config.hooks.prePush.onFailure;
       if (onFailure == OnFailure.warn) {
-        print('\x1B[33m⚠  CI checks failed, but continuing (warn mode).\x1B[0m');
+        print(
+            '\x1B[33m⚠  CI checks failed, but continuing (warn mode).\x1B[0m');
         return 0;
       } else if (onFailure == OnFailure.ask) {
         if (stdin.hasTerminal) {
@@ -228,8 +225,7 @@ class InstallCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    final projectPath =
-        p.canonicalize(argResults!['project-path'] as String);
+    final projectPath = p.canonicalize(argResults!['project-path'] as String);
     try {
       GitHookInstaller(projectPath).install();
       print('\x1B[32m✔  Pre-push hook installed.\x1B[0m');
@@ -261,8 +257,7 @@ class UninstallCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    final projectPath =
-        p.canonicalize(argResults!['project-path'] as String);
+    final projectPath = p.canonicalize(argResults!['project-path'] as String);
     try {
       GitHookInstaller(projectPath).uninstall();
       print('\x1B[32m✔  Pre-push hook removed.\x1B[0m');
@@ -297,8 +292,7 @@ class StatusCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    final projectPath =
-        p.canonicalize(argResults!['project-path'] as String);
+    final projectPath = p.canonicalize(argResults!['project-path'] as String);
     final configArg = argResults!['config'] as String;
     final configPath =
         p.isAbsolute(configArg) ? configArg : p.join(projectPath, configArg);
@@ -323,8 +317,7 @@ class StatusCommand extends Command<int> {
         '  analyze : ${config.checks.analyze.enabled ? 'enabled' : 'disabled'}');
     print(
         '  format  : ${config.checks.format.enabled ? 'enabled' : 'disabled'}');
-    print(
-        '  test    : ${config.checks.test.enabled ? 'enabled' : 'disabled'}');
+    print('  test    : ${config.checks.test.enabled ? 'enabled' : 'disabled'}');
     final buildLabel = config.checks.build.enabled
         ? 'enabled (${config.checks.build.platforms.join(', ')})'
         : 'disabled';
@@ -355,8 +348,7 @@ class InitCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    final projectPath =
-        p.canonicalize(argResults!['project-path'] as String);
+    final projectPath = p.canonicalize(argResults!['project-path'] as String);
     final dest = p.join(projectPath, 'flutter_ci.yaml');
 
     if (File(dest).existsSync()) {

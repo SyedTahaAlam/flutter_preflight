@@ -13,10 +13,8 @@ class CiReport {
     required this.results,
   });
 
-  int get passed =>
-      results.where((r) => r.status == CheckStatus.passed).length;
-  int get failed =>
-      results.where((r) => r.status == CheckStatus.failed).length;
+  int get passed => results.where((r) => r.status == CheckStatus.passed).length;
+  int get failed => results.where((r) => r.status == CheckStatus.failed).length;
   int get skipped =>
       results.where((r) => r.status == CheckStatus.skipped).length;
   int get warnings =>

@@ -17,7 +17,7 @@ class TerminalReporter {
   const TerminalReporter({this.verbose = false});
 
   void printHeader() {
-    const border = '─' * 45;
+    final border = List.filled(45, '─').join();
     print('$_cyan┌$border┐$_reset');
     print(
       '$_cyan│$_reset'
@@ -62,7 +62,7 @@ class TerminalReporter {
   }
 
   void printFooter(CiReport report) {
-    const border = '─' * 45;
+    final border = List.filled(45, '─').join();
     print('$_gray$border$_reset');
 
     final passedStr = '$_green${report.passed} passed$_reset';
