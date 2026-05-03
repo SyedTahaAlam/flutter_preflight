@@ -1,0 +1,48 @@
+# flutter_ci.yaml — place at your Flutter project root
+version: 1
+
+checks:
+  analyze:
+    enabled: true
+    fatal_infos: false
+    fatal_warnings: true
+
+  format:
+    enabled: true
+    line_length: 80
+
+  test:
+    enabled: true
+    coverage:
+      enabled: true
+      minimum_percent: 0        # 0 = no minimum enforced
+    exclude:
+      - "**/*.g.dart"
+      - "**/*.freezed.dart"
+
+  build:
+    enabled: false
+    platforms:
+      - apk
+      # - ios      (macOS only)
+      # - web
+      # - windows  (Windows only)
+      # - macos    (macOS only)
+      # - linux    (Linux only)
+
+output:
+  terminal:
+    enabled: true
+    verbose: false              # true = show full subprocess output
+  html_report:
+    enabled: false
+    output_path: "ci_reports/report.html"
+  json_report:
+    enabled: false
+    output_path: "ci_reports/report.json"
+
+hooks:
+  pre_push:
+    enabled: true
+    on_failure: ask             # Options: block | warn | ask
+    auto_install: true          # Auto-install hook on first run
